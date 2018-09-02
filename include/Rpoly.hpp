@@ -91,6 +91,7 @@ namespace Jenkins {
         qk = std::vector<T>(static_cast<unsigned long>(degree + 1));
         svk = std::vector<T>(static_cast<unsigned long>(degree + 1));
 /*  Make a copy of the coefficients. */
+
         for (i=0;i<=n;i++)
             p[i] = op[n - i];
 /*  Start the algorithm for one zero. */
