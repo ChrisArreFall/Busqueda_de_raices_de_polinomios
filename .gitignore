@@ -1,0 +1,6 @@
+# Created by .ignore support plugin (hsz.mobi)
+### C++ template
+*.o
+*.out
+cmake-build-debug/
+.idea/

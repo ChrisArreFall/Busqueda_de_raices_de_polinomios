@@ -13,36 +13,43 @@
 
 #include <vector>
 #include <type_traits>
+#include "Exception.hpp"
+#include <iostream>
+#include <complex>
+#include "HelperVectorInsert.hpp"
 
 #include <boost/type_traits/is_complex.hpp>
 #include <boost/math/tools/polynomial.hpp>
 
 namespace anpi {
 
-  namespace bmt=boost::math::tools; // for polynomial
-  
-  /**
-   * Compute the roots of the given polynomial using the Jenkins-Traub method.
-   * @param[in] poly polynomial to be analyzed for roots
-   * @param[out] roots all roots found
-   * @param[in] start initial point for finding the roots
-   * @param[in] polish indicate if polishing is needed or not.
-   *
-   * @return the number of roots found
-   */
-  template<class T,class U>
-  void jenkinsTraub(const bmt::polynomial<T>& poly,
-                    std::vector<U>& roots) {
-    
-    static_assert(std::is_floating_point<T>::value ||
-                  boost::is_complex<T>::value,
-                  "T must be floating point or complex");
-    static_assert(std::is_floating_point<U>::value ||
-                  boost::is_complex<U>::value,
-                  "U must be floating point or complex");
+    namespace bmt=boost::math::tools; // for polynomial
 
-    throw Exception("Not implemented yet!");
-  }
+    /**
+     * Compute the roots of the given polynomial using the Jenkins-Traub method.
+     * @param[in] poly polynomial to be analyzed for roots
+     * @param[out] roots all roots found
+     * @param[in] start initial point for finding the roots
+     * @param[in] polish indicate if polishing is needed or not.
+     *
+     * @return the number of roots found
+     */
+    template<class T, class U>
+    void jenkinsTraub(const bmt::polynomial<T> &poly,
+                      std::vector<U> &roots) {
+
+        static_assert(std::is_floating_point<T>::value ||
+                      boost::is_complex<T>::value,
+                      "T must be floating point or complex");
+        static_assert(std::is_floating_point<U>::value ||
+                      boost::is_complex<U>::value,
+                      "U must be floating point or complex");
+
+        std::cout<<poly<<std::endl;
+        hvins::Helper<T, U>(poly).test(roots);
+
+    }
+
 }
 
 
