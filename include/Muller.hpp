@@ -27,23 +27,23 @@ namespace anpi {
   };
 
   namespace bmt=boost::math::tools; // for polynomial
-  
-  /**
-   * Compute the roots of the given polynomial using the Muller method.
-   * @param[in] poly polynomial to be analyzed for roots
-   * @param[out] roots all roots found
-   * @param[in] start initial point for finding the roots
-   * @param[in] polish indicate if polishing is needed or not.
-   *
-   * @return the number of roots found
-   */
+
+    /**
+     * Compute the roots of the given polynomial using the Muller method.
+     * @param[in] poly polynomial to be analyzed for roots
+     * @param[out] roots all roots found
+     * @param[in] start initial point for finding the roots
+     * @param[in] polish indicate if polishing is needed or not.
+     *
+     * @return the number of roots found
+     */
   template<class T,class U>
   void muller(const bmt::polynomial<T>& poly,
               std::vector<U>& roots,
               const PolishEnum polish=DoNotPolish,
               const U start=U()) {
-    
-    static_assert(std::is_floating_point<T>::value ||
+
+      static_assert(std::is_floating_point<T>::value ||
                   boost::is_complex<T>::value,
                   "T must be floating point or complex");
     static_assert(std::is_floating_point<U>::value ||

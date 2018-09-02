@@ -22,9 +22,11 @@ private:
     void calcsc(int *type);
     void nextk(const int *type);
     void newest(int type,T *uu,T *vv);
-    void quadsd(int nn,T *u,T *v,T *p,T *q,
-                T *a,T *b);
-    T *p,*qp,*k,*qk,*svk;
+
+    void quadsd(int nn, T *u, T *v, std::vector<T> &p, std::vector<T> &q,
+                T *a, T *b);
+
+    std::vector<T> p, qp, k, qk, svk;
     T sr,si,u,v,a,b,c,d,a1,a2;
     T a3,a6,a7,e,f,g,h,szr,szi,lzr,lzi;
     T eta,are,mre;
@@ -38,8 +40,8 @@ namespace Jenkins {
     template <class T>
     int RPoly<T>::findRoots(const std::vector<T> &op, int degree, std::vector<T> &zeror, std::vector<T> &zeroi)
     {
-        T t,aa,bb,cc,*temp,factor,rot;
-        T *pt;
+        T t, aa, bb, cc, factor, rot;
+
         T lo,max,min,xx,yy,cosr,sinr,xxx,x,sc,bnd;
         T xm,ff,df,dx,infin,smalno,base;
         int cnt,nz,i,j,jj,l,nm1,zerok;
@@ -81,16 +83,16 @@ namespace Jenkins {
 /*
  *  Allocate memory here
  */
-        temp = new T [degree+1];
-        pt = new T [degree+1];
-        p = new T [degree+1];
-        qp = new T [degree+1];
-        k = new T [degree+1];
-        qk = new T [degree+1];
-        svk = new T [degree+1];
+        std::vector<T> temp(static_cast<unsigned long>(degree + 1));
+        std::vector<T> pt(static_cast<unsigned long>(degree + 1));
+        p = std::vector<T>(static_cast<unsigned long>(degree + 1));
+        qp = std::vector<T>(static_cast<unsigned long>(degree + 1));
+        k = std::vector<T>(static_cast<unsigned long>(degree + 1));
+        qk = std::vector<T>(static_cast<unsigned long>(degree + 1));
+        svk = std::vector<T>(static_cast<unsigned long>(degree + 1));
 /*  Make a copy of the coefficients. */
         for (i=0;i<=n;i++)
-            p[i] = op[i];
+            p[i] = op[n - i];
 /*  Start the algorithm for one zero. */
         _40:
         if (n == 1) {
@@ -249,14 +251,6 @@ namespace Jenkins {
         }
 /*  Return with failure if no convergence with 20 shifts. */
         _99:
-        delete [] svk;
-        delete [] qk;
-        delete [] k;
-        delete [] qp;
-        delete [] p;
-        delete [] pt;
-        delete [] temp;
-
         return degree - n;
     }
     /*  Computes up to L2 fixed shift k-polynomials,
@@ -699,8 +693,8 @@ namespace Jenkins {
  *  in q and the remainder in a,b.
  */
     template <class T>
-    void RPoly<T>::quadsd(int nn,T *u,T *v,T *p,T *q,
-                          T *a,T *b)
+    void RPoly<T>::quadsd(int nn, T *u, T *v, std::vector<T> &p, std::vector<T> &q,
+                          T *a, T *b)
     {
         T c;
         int i;
