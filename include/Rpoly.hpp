@@ -1,3 +1,8 @@
+/**
+ * Implementación del método Jenkins-Traub RPOLY basada la solución de de Simbody https://github.com/simbody/simbody
+ * 
+ */
+
 #ifndef RPOLY_H
 #define RPOLY_H
 #include <vector>
