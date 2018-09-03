@@ -16,7 +16,7 @@
 #include "Exception.hpp"
 #include <iostream>
 #include <complex>
-#include "HelperVectorInsert.hpp"
+#include "Helper.hpp"
 
 #include <boost/type_traits/is_complex.hpp>
 #include <boost/math/tools/polynomial.hpp>
@@ -46,7 +46,7 @@ namespace anpi {
                       "U must be floating point or complex");
 
         std::cout<<poly<<std::endl;
-        hvins::Helper<T, U>(poly).test(roots);
+        helper::Helper<T, U>(poly).solve(roots);
 
     }
 
