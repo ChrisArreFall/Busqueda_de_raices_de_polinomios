@@ -1,6 +1,6 @@
 /**
  * Implementación del método Jenkins-Traub RPOLY basada la solución de de Simbody https://github.com/simbody/simbody
- * 
+ *
  */
 
 #ifndef RPOLY_H
@@ -10,10 +10,10 @@
 #include <limits>
 #include <algorithm>
 #include <complex>
-using dcomp =std::complex<double>;
-using fcomp =std::complex<float>;
-namespace Jenkins {
 
+namespace Jenkins {
+    using dcomp =std::complex<double>;
+    using fcomp =std::complex<float>;
 template <class T>
 class RPoly {
 public:
