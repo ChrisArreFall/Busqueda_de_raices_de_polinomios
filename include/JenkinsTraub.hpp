@@ -45,7 +45,6 @@ namespace anpi {
                       boost::is_complex<U>::value,
                       "U must be floating point or complex");
 
-        std::cout<<poly<<std::endl;
         helper::Helper<T, U>(poly).solve(roots);
 
     }

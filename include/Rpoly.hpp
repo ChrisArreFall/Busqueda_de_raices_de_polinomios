@@ -399,34 +399,6 @@ namespace Jenkins {
  *  sign.
  */
 
-// sherm 20130410: this early return caused premature termination and
-// then failure to find any roots in rare circumstances with 6th order
-// ellipsoid nearest point equations. Previously (and in all implementations of
-// Jenkins-Traub that I could find) it was just a test on the
-// relative size of the difference with respect to the larger root lzr.
-// I added the std::max(...,0.1) so that if the roots are small then an
-// absolute difference below 0.001 will be considered "close enough" to
-// continue iterating. In the case that failed, the roots were around .0001
-// and .0002, so their difference was considered large compared with 1% of
-// the larger root, 2e-6. But in fact continuing the loop instead resulted in
-// six very high-quality roots instead of none.
-//
-// I'm sorry to say I don't know if I have correctly diagnosed the problem or
-// whether this is the right fix! It does pass the regression tests and
-// apparently cured the ellipsoid problem. I added the particular bad
-// polynomial to the PolynomialTest regression if you want to see it fail.
-// These are the problematic coefficients:
-//   1.0000000000000000
-//   0.021700000000000004
-//   2.9889970904696875e-005
-//   1.0901272298136685e-008
-//  -4.4822782160985054e-012
-//  -2.6193432740351220e-015
-//  -3.0900602527225053e-019
-//
-// Original code:
-        //if (fabs(fabs(szr)-fabs(lzr)) > 0.01 * fabs(lzr)) return;
-// Fixed version:
         if ((T)std::abs(std::abs(szr)-std::abs(lzr)) > (T)0.01 * std::max((T)std::abs(lzr),(T)0.1))
             return;
 
