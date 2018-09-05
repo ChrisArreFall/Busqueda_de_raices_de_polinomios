@@ -13,20 +13,24 @@
 
 #include <vector>
 #include <type_traits>
+#include <iostream>
+
+#include "HelperMuller.hpp"
 
 #include <boost/type_traits/is_complex.hpp>
 #include <boost/math/tools/polynomial.hpp>
 
 
 namespace anpi {
-  
-  /// Enumerator makes explicit polishing roots
-  enum PolishEnum {
-    DoNotPolish,
-    PolishRoots
-  };
 
-  namespace bmt=boost::math::tools; // for polynomial
+
+    /// Enumerator makes explicit polishing roots
+    enum PolishEnum {
+        DoNotPolish,
+        PolishRoots
+    };
+
+    namespace bmt=boost::math::tools; // for polynomial
 
     /**
      * Compute the roots of the given polynomial using the Muller method.
@@ -37,22 +41,37 @@ namespace anpi {
      *
      * @return the number of roots found
      */
-  template<class T,class U>
-  void muller(const bmt::polynomial<T>& poly,
-              std::vector<U>& roots,
-              const PolishEnum polish=DoNotPolish,
-              const U start=U()) {
 
-      static_assert(std::is_floating_point<T>::value ||
-                  boost::is_complex<T>::value,
-                  "T must be floating point or complex");
-    static_assert(std::is_floating_point<U>::value ||
-                  boost::is_complex<U>::value,
-                  "U must be floating point or complex");
+    template<class T, class U>
+    void muller(const bmt::polynomial<T> &poly,
+                std::vector<U> &roots,
+                const PolishEnum polish = DoNotPolish,
+                const U start = U()) {
 
-    throw Exception("Not implemented yet!");
-  }
+
+        static_assert(std::is_floating_point<T>::value ||
+                      boost::is_complex<T>::value,
+                      "T must be floating point or complex");
+        static_assert(std::is_floating_point<U>::value ||
+                      boost::is_complex<U>::value,
+                      "U must be floating point or complex");
+
+        std::cout << poly << std::endl;
+        /*
+        for(int i = 0;i<poly.degree();i++){
+            if(polish){
+
+            }
+
+        }
+        */
+
+
+        U xTemp = helperMuller::HelperMuller<T, U>(poly).solve(start);
+        roots.push_back(U(xTemp));
+    }
 }
+
 
 
 #endif
