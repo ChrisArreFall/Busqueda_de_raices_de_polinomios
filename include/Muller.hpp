@@ -16,6 +16,7 @@
 #include <iostream>
 
 #include "HelperMuller.hpp"
+#include "Deflation.hpp"
 
 #include <boost/type_traits/is_complex.hpp>
 #include <boost/math/tools/polynomial.hpp>
@@ -57,18 +58,23 @@ namespace anpi {
                       "U must be floating point or complex");
 
         std::cout << poly << std::endl;
-        /*
-        for(int i = 0;i<poly.degree();i++){
+
+        U raizi = start;
+        bmt::polynomial<T> polyTemp = poly;
+        for(int i = 0;i<(int)poly.degree();i++){
+            raizi = helperMuller::HelperMuller<T, U>(polyTemp).solve(raizi,polyTemp);
             if(polish){
-
             }
-
+            else{
+                roots.push_back(U(raizi));
+            }
         }
-        */
-
-
-        U xTemp = helperMuller::HelperMuller<T, U>(poly).solve(start);
-        roots.push_back(U(xTemp));
+        if(polish){
+            for(int i = 0;i<(int)poly.degree();i++){
+                raizi = helperMuller::HelperMuller<T, U>(polyTemp).solve(raizi,polyTemp);
+                roots.push_back(U(raizi));
+            }
+        }
     }
 }
 

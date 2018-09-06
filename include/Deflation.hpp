@@ -32,8 +32,8 @@ namespace anpi {
     template<class T>
     bmt::polynomial<T> deflate(const bmt::polynomial<T> &poly,
                                const T &root,
-                               T &residue,
-                               T tolerance = anpi::bmt::epsilon<T>()) {
+                               T &residue
+                               ) {
 
         /*
          * Important data is defined, the degree of the function is
@@ -77,9 +77,8 @@ namespace anpi {
      */
     template<class T>
     bmt::polynomial<T> deflate2(const bmt::polynomial<T> &poly,
-                                const std::complex<T> &root,
-                                std::complex<T> &residue,
-                                T tolerance = anpi::bmt::epsilon<T>()) {
+                                const T &root,
+                                T &residue) {
 
         /*
          * Important data is defined, the degree of the function is
